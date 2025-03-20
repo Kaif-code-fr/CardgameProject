@@ -3,68 +3,40 @@ package cardgameex;
 import cardgameex.Card.*;
 
 public class Card {
+    private int value; // 0 for Skip-Bo (wild), 1-12 for numbered cards
 
-    // Example using Array
-    private int value;
-    private String suit;
-
-    public static final String[] SUITS={
-       "HEARTS", "CLUBS","SPADES", "DIAMONDS" };   
-    
-    public Card(int value, String suit)
-    {
+    // Constructor
+    public Card(int value) {
+        if (value < 0 || value > 12) {
+            throw new IllegalArgumentException("Card value must be between 0 (Skip-Bo) and 12.");
+        }
         this.value = value;
-        this.suit = suit;
     }
 
-    public String getSuit() {
-        return suit;
-    }
-
-    public void setSuit(String suit) {
-        this.suit = suit;
-    }
-    
+    // Get the value of the card
     public int getValue() {
         return value;
     }
-    
+
+    // Set the value (with validation)
     public void setValue(int value) {
+        if (value < 0 || value > 12) {
+            throw new IllegalArgumentException("Card value must be between 0 (Skip-Bo) and 12.");
+        }
         this.value = value;
     }
 
-	
-    //Example using Enum
-   /* public enum Suit {
-        HEARTS, CLUBS, SPADES, DIAMONDS
+    // String representation of the card
+    @Override
+    public String toString() {
+        if (value == 0) {
+            return "Skip-Bo";
+        }
+        return String.valueOf(value);
     }
 
-    public enum Value {
-        ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING,
-        JACL
+    // Check if the card is a Skip-Bo wild card
+    public boolean isWild() {
+        return value == 0;
     }
-    private Value value;
-    private Suit suit;
-
-    public Card(Value v, Suit s) {
-        value = v;
-        suit = s;
-    }
-
-    public Value getValue() {
-        return value;
-    }
-
-    public void setValue(Value value) {
-        this.value = value;
-    }
-
-    public Suit getSuit() {
-        return suit;
-    }
-
-    public void setSuit(Suit suit) {
-        this.suit = suit;
-    }*/
-
 }
