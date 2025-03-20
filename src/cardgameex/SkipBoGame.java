@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  * @author fagun
  */
-public class CardGameEx {
+public class SkipBoGame {
      private static final int STOCKPILE_SIZE = 10; // Small for testing; typically 30 in short games
     private static final int HAND_SIZE = 5;
     private static final int MAX_BUILDING_PILES = 4;
@@ -27,7 +27,7 @@ public class CardGameEx {
     private ArrayList<ArrayList<Card>> discardPiles; // Up to 4 discard piles
     private Scanner input;
 
-    public CardGameEx() {
+    public SkipBoGame() {
         input = new Scanner(System.in);
         initializeGame();
     }
@@ -176,7 +176,7 @@ public class CardGameEx {
 
     // Main method to start the game
     public static void main(String[] args) {
-        CardGameEx game = new CardGameEx();
+        SkipBoGame game = new SkipBoGame();
         game.play();
     }
 }
