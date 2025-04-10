@@ -7,14 +7,11 @@ public class CardHandGenerator {
     private static final int MAX_NUMBER = 12; // Highest numbered card
     private static final double WILD_CARD_PROBABILITY = 0.1; // Roughly 18/162 ≈ 11% chance of Skip-Bo card
 
-    // Generate a stockpile of cards (e.g., 30 cards for a short game, adjustable)
+    // Factory Method Pattern: Encapsulates card creation, open for extension (OCP)
     public static Card[] generateStockpile(int size) {
-        if (size <= 0) {
-            throw new IllegalArgumentException("Stockpile size must be positive.");
-        }
         Card[] stockpile = new Card[size];
         for (int i = 0; i < size; i++) {
-            stockpile[i] = generateRandomCard();
+            stockpile[i] = createCard();
         }
         return stockpile;
     }
@@ -29,6 +26,11 @@ public class CardHandGenerator {
             hand[i] = generateRandomCard();
         }
         return hand;
+    }
+    
+    // Factory Method: Can be overridden in subclasses for different card types
+    private static Card createCard() {
+        return random.nextDouble() < WILD_CARD_PROBABILITY ? new Card(0) : new Card(random.nextInt(MAX_NUMBER) + 1);
     }
 
     // Helper method to generate a single random card
